@@ -3,9 +3,11 @@
 {% block content %}
 
         <p> la lesson institule {{ lesson.nom }} a ete ceer par  {{ lesson.creer_par }} </p><br>
+        {% if user.is_superuser %}
         <a href="{% url 'programmes:lessonupdate' niveau=lesson.niveau.slug matiere=lesson.matiere.slug slug=lesson.slug %}"> modifier la lesson</a>
         <a href="{% url 'programmes:lessondelete' niveau=lesson.niveau.slug matiere=lesson.matiere.slug slug=lesson.slug %}"> supprimez la lesson</a>
 
+        {% endif %}
 
         <h4>Poste votre commentaire ici bas.</h4>
 
