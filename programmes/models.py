@@ -74,7 +74,10 @@ class Commentaire(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        self.nom_comm = slugify("commente par " + str(self.auteur) + "a " + str(self.date_added) )
+        self.nom_comm = slugify(
+            f"commente par {str(self.auteur)}a {str(self.date_added)}"
+        )
+
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -91,4 +94,4 @@ class Reponse(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "reponse a" + str(self.nom_comm.nom_comm)
+        return f"reponse a{str(self.nom_comm.nom_comm)}"

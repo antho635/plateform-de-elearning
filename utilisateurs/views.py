@@ -39,21 +39,18 @@ def register(request):
     return render(request, 'utilisateurs/register.html', content)        
             
 def user_login(request):
-    if request.method=='POST':
-        username=request.POST.get('username')
-        password=request.POST.get('password')
-        user=authenticate(username=username, password=password)
-
-        if user:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/')
-            else:
-                return HttpResponse("L'utilisateur es desactive")
+    if request.method != 'POST':
+        return render(request, 'utilisateurs/login.html')
+    username=request.POST.get('username')
+    password=request.POST.get('password')
+    if user := authenticate(username=username, password=password):
+        if user.is_active:
+            login(request, user)
+            return HttpResponseRedirect('/')
         else:
-            return HttpResponse("Soit votre nom ou votre password est incorrect") 
+            return HttpResponse("L'utilisateur es desactive")
     else:
-        return render(request, 'utilisateurs/login.html')  
+        return HttpResponse("Soit votre nom ou votre password est incorrect")  
 
 @login_required
 def user_logout(request):
