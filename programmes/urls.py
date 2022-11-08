@@ -1,6 +1,8 @@
 from django.urls import path
 from programmes.views import *
+
 app_name = "programmes"
+
 urlpatterns = [
     path('', NiveauListView.as_view(), name="niveaulist"),
     path('<slug:slug>', MatiereListView.as_view(), name="matierelist"),
