@@ -8,7 +8,7 @@ def renomer_image(instance, filename):
     # pho.png
     ext = filename.split('.')[-1]
     if instance.user.username:
-        filename = "photo_profile/{}.{}".format(instance.user.username, ext)
+        filename = f"photo_profile/{instance.user.username}.{ext}"
     return os.path.join(upload_to, filename)
 
 
